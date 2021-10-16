@@ -1,7 +1,7 @@
 pipeline {
     agent any
     tools {
-        maven 'maven383'
+        maven 'mvn383'
     }
     stages {
         stage('Unit test') {
