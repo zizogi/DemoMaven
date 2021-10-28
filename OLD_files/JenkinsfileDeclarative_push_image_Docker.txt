@@ -1,7 +1,7 @@
 pipeline {
     agent any
     tools {
-        maven 'mvn383'
+        maven 'maven363'
     }
     stages {
         stage('Unit test') {
@@ -18,13 +18,10 @@ pipeline {
                 sh  'mvn package -DskipTest'
             }
         }
-    }
-    
-
 
         stage('Build and run docker image') {
             steps {
-                  sh 'docker build -t zizodk/test:v1.0.${BUILD_NUMBER} .'
+                  sh 'docker build -t freemanpolys/test:v1.0.${BUILD_NUMBER} .'
                   Script {
                          try {
                              sh 'docker rm -f test'
@@ -33,7 +30,7 @@ pipeline {
                             echo 'Erreur de suppression'
                          }
                   }
-                  sh 'docker run --name test -d -p 8088:8088 zizodk/test:v1.0.${BUILD_NUMBER}'
+                  sh 'docker run --name test -d -p 8088:8088 freemanpolys/test:v1.0.${BUILD_NUMBER}'
             }
         }
 
@@ -47,10 +44,10 @@ pipeline {
         }     
 
     }
-
+    
     post {
          always {
-             junit 'target/surefire-reports/*.xml'
+             junit 'target/surfire-reports/**/*.xml'
              archiveArtifacts artifacts: 'target/*.jar'
          }
     }

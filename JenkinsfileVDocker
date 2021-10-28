@@ -1,7 +1,7 @@
 pipeline {
     agent any
     tools {
-        maven 'mvn383'
+        maven 'maven363'
     }
     stages {
         stage('Unit test') {
@@ -18,9 +18,6 @@ pipeline {
                 sh  'mvn package -DskipTest'
             }
         }
-    }
-    
-
 
         stage('Build and run docker image') {
             steps {
@@ -47,10 +44,10 @@ pipeline {
         }     
 
     }
-
+    
     post {
          always {
-             junit 'target/surefire-reports/*.xml'
+             junit 'target/surfire-reports/**/*.xml'
              archiveArtifacts artifacts: 'target/*.jar'
          }
     }
