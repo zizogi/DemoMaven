@@ -18,6 +18,8 @@ pipeline {
                 sh  'mvn package -DskipTest'
             }
         }
+    }
+    
 
 
         stage('Build and run docker image') {
@@ -42,11 +44,7 @@ pipeline {
                     sh 'docker push freemanpolys/test:v1.0.${BUILD_NUMBER}'
                   }
             }
-        }  
-
-
-    }
-    
+        }     
 
 
     post {
