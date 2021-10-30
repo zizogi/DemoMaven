@@ -23,14 +23,7 @@ pipeline {
         stage('Build and run docker image') {
             steps {
                   sh 'docker build -t zizodk/test:v1.0.${BUILD_NUMBER} .'
-                  Script {
-                         try {
-                             sh 'docker rm -f test'
-                         }
-                         catch (exc){
-                            echo 'Erreur de suppression'
-                         }
-                  }
+
                   sh 'docker run --name test -d -p 8088:8088 zizodk/test:v1.0.${BUILD_NUMBER}'
             }
         }
