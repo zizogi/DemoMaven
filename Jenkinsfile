@@ -24,7 +24,7 @@ pipeline {
             steps {
                   sh 'docker build -t zizodk/test:v1.0.${BUILD_NUMBER} .'
 
-                  sh 'docker run --name test -d -p 8088:8088 zizodk/test:v1.0.${BUILD_NUMBER}'
+                  sh 'docker run --name test${BUILD_NUMBER} -d -p 8088:8088 zizodk/test:v1.0.${BUILD_NUMBER}'
             }
         }
 
